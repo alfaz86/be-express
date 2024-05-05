@@ -1,7 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require("../lib/prisma");
 const response = require("./../lib/response")
-
-const prisma = new PrismaClient();
 
 exports.getProfile = async (req, res) => {
     try {
