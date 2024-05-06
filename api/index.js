@@ -1,16 +1,17 @@
 const express = require("express");
-const app = express();
-const dotenv = require('dotenv').config();
+const dotenv = require("dotenv");
 const cors = require("cors");
-const corsOptions = require("./../lib/cors.js");
 const ContentRoute = require("./../routes/ContentRoute.js");
 const ProfileRoute = require("./../routes/ProfileRoute.js");
 const ProjectRoute = require("./../routes/ProjectRoute.js");
 
+dotenv.config();
+
 const port = process.env.APP_PORT || 8080;
+const app = express();
 
 // Middleware CORS
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Routes
 app.use(ContentRoute);
