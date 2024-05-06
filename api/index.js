@@ -1,20 +1,27 @@
 const express = require("express");
-const app = express();
-const dotenv = require('dotenv').config();
+const dotenv = require("dotenv");
 const cors = require("cors");
-const corsOptions = require("./../lib/cors.js");
 const ContentRoute = require("./../routes/ContentRoute.js");
 const ProfileRoute = require("./../routes/ProfileRoute.js");
 const ProjectRoute = require("./../routes/ProjectRoute.js");
 
-const port = process.env.APP_PORT || 8080;
+dotenv.config();
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+const port = process.env.APP_PORT || 8080;
+const app = express();
+
+// Middleware CORS
+app.use(cors());
+
+// Routes
 app.use(ContentRoute);
 app.use(ProfileRoute);
 app.use(ProjectRoute);
-app.use(cors(corsOptions));
 
+// Root Route
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
+// Server Listen
 app.listen(port, () => console.log(`The server runs on... http://localhost:${port}`));
 
 module.exports = app;
