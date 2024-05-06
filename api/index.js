@@ -9,12 +9,18 @@ const ProjectRoute = require("./../routes/ProjectRoute.js");
 
 const port = process.env.APP_PORT || 8080;
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+// Middleware CORS
+app.use(cors(corsOptions));
+
+// Routes
 app.use(ContentRoute);
 app.use(ProfileRoute);
 app.use(ProjectRoute);
-app.use(cors(corsOptions));
 
+// Root Route
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
+// Server Listen
 app.listen(port, () => console.log(`The server runs on... http://localhost:${port}`));
 
 module.exports = app;
